@@ -54,7 +54,14 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         # Fetch the ICMP header from the IP packet
         id, type, checksum, code, sequence = struct.unpack("bbHHh", icmp_header)
 
+        #Per TA session, need code to retrun if I receive reply
+        #Calculate time betw sending and receiving
+        if type == 0:
+            return (timeReceived - startedSelect)
+            #return ((timeReceived - startedSelect) * 1000)
+
         # Fill in end
+        # This code addresses timeouts
         timeLeft = timeLeft - howLongInSelect
         if timeLeft <= 0:
             return "Request timed out."
