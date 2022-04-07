@@ -48,8 +48,11 @@ def receiveOnePing(mySocket, ID, timeout, destAddr):
         recPacket, addr = mySocket.recvfrom(1024)
 
         # Fill in start
-
+        #Need to check TA session but confirm the (20) header part and 8 bytes of datagram
+        #this is what creates icmp messg
+        icmp_header = recPacket[20:28]
         # Fetch the ICMP header from the IP packet
+        id, type, checksum, code, sequence = struct.unpack("bbHHh", icmp_header)
 
         # Fill in end
         timeLeft = timeLeft - howLongInSelect
