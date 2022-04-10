@@ -102,8 +102,10 @@ def doOnePing(destAddr, timeout):
 
     # SOCK_RAW is a powerful socket type. For more details:   https://sock-raw.org/papers/sock_raw
     mySocket = socket(AF_INET, SOCK_RAW, icmp)
+    #print("The socket: ", mySocket)
 
     myID = os.getpid() & 0xFFFF  # Return the current process i
+    #print("the ID: ", mySocket)
     sendOnePing(mySocket, destAddr, myID)
     delay = receiveOnePing(mySocket, myID, timeout, destAddr)
     mySocket.close()
@@ -119,9 +121,15 @@ def ping(host, timeout=1):
 
     #Send ping requests to a server separated by approximately one second
     #Add something here to collect the delays of each ping in a list so you can calculate vars after your ping
-    
+    #Need to get vars
+    ctr = 0
+    timesctr=[]
+
     for i in range(0,4): #Four pings will be sent (loop runs for i=0, 1, 2, 3)
         delay = doOnePing(dest, timeout)
+        #check for time out
+        if delay != "Request timed out":
+            timesctr.append(delay)
         print(delay)
         time.sleep(1)  # one second
         
