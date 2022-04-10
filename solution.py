@@ -135,11 +135,11 @@ def ping(host, timeout=1):
         time.sleep(1)  # one second
         
     #You should have the values of delay for each ping here; fill in calculation for packet_min, packet_avg, packet_max, and stdev
-    #vars = [str(round(packet_min, 8)), str(round(packet_avg, 8)), str(round(packet_max, 8)),str(round(stdev(stdev_var), 8))]
     min_packet = min(timesctr)
     avg_packet = (sum(timesctr)/len(timesctr))
     max_packet = max(timesctr)
-    std_dev = statistics.stdev(timesctr)
+    std_dev_packet = statistics.stdev(timesctr)
+    vars = [str(round(min_packet, 8)), str(round(avg_packet, 8)), str(round(max_packet, 8)),str(round(std_dev_packet, 8))]
 
     return vars
 
